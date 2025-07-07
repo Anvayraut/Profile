@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coin Flip Game</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 3rem;
+    }
+    h1 {
+      color: #4fc3f7;
+    }
+    .coin-container {
+      perspective: 1000px;
+      width: 150px;
+      height: 150px;
+      margin: 2rem auto;
+    }
+    .coin {
+  width: 100px;
+  height: 100px;
+  margin: 1rem auto;
+  background-color: #333;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: none;
+  transform-origin: center center; 
+  transform-style: preserve-3d;    
+  backface-visibility: hidden;    
+}
+    .coin img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 50%;
+    }
+    .tails {
+      transform: rotateY(180deg);
+    }
+    .animate-heads {
+      animation: flip-heads 1s ease-in-out forwards;
+    }
+    .animate-tails {
+      animation: flip-tails 1s ease-in-out forwards;
+    }
+    @keyframes flip-heads {
+  0% { transform: rotateY(0deg) scale(1); }
+  50% { transform: rotateY(720deg) scale(1.1); }
+  100% { transform: rotateY(1440deg) scale(1); }
+    }
+    @keyframes flip-tails {
+  0% { transform: rotateY(0deg) scale(1); }
+  50% { transform: rotateY(720deg) scale(1.1); }
+  100% { transform: rotateY(1620deg) scale(1); }
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #4fc3f7;
+      color: #000;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #00bcd4;
+    }
+    #result {
+      margin-top: 2rem;
+      font-size: 1.5rem;
+    }
+    .scoreboard {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+    .scoreboard span {
+      display: inline-block;
+      margin: 0 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>🪙 Coin Flip Game</h1>
+  <p>Click the button to flip the coin!</p>
+
+  <div class="coin-container">
+    <div id="coin" class="coin">
+      <img src="heads.png" alt="Heads" class="heads" />
+      <img src="tails.png" alt="Tails" class="tails" />
+    </div>
+  </div>
+
+<button onclick="flipCoin()">Flip Coin</button>
+  <div id="result"></div>
+
+  <div class="scoreboard">
+    <span>Heads: <span id="heads-count">0</span></span>
+    <span>Tails: <span id="tails-count">0</span></span>
+  </div>
+
+  <audio id="flip-sound">
+    <source src="coin-flip-shimmer-85750.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    const coin = document.getElementById("coin");
+    const resultDiv = document.getElementById("result");
+    const sound = document.getElementById("flip-sound");
+    const headsCountEl = document.getElementById("heads-count");
+    const tailsCountEl = document.getElementById("tails-count");
+
+    let headsCount = 0;
+    let tailsCount = 0;
+
+    function flipCoin() {
+      coin.classList.remove("animate-heads", "animate-tails");
+      resultDiv.textContent = "";
+
+      const isHeads = Math.random() < 0.5;
+
+      setTimeout(() => {
+        coin.classList.add(isHeads ? "animate-heads" : "animate-tails");
+        sound.currentTime = 0;
+        sound.play();
+      }, 50);
+
+      setTimeout(() => {
+        if (isHeads) {
+          headsCount++;
+          resultDiv.textContent = "Heads 🧠";
+        } else {
+          tailsCount++;
+          resultDiv.textContent = "Tails 🐍";
+        }
+        headsCountEl.textContent = headsCount;
+        tailsCountEl.textContent = tailsCount;
+      }, 1000);
+    }
+  </script>
+<a href="index.html" style="display: inline-block; margin-top: 2rem; padding: 10px 20px; background-color: #4fc3f7; color: #000; text-decoration: none; border-radius: 8px;">
+  🔙 Back to Profile
+</a>
+
+</body>
+</html>

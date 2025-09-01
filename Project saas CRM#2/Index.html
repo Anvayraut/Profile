@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRM Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="crm-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div>
+        <div class="top">
+          <div>
+            <h2>CRM LOGO</h2>
+          </div>
+          <div class="close" id="close-btn">
+            <span class="material-symbols-outlined">close</span>
+          </div>
+        </div>
+        <div class="navigation">
+          <a href="Index.html" class="active">
+            <span class="material-symbols-outlined">dashboard</span> Dashboard
+          </a>
+          <a href="batches.html">
+            <span class="material-symbols-outlined">groups_3</span> Batches
+          </a>
+        </div>
+      </div>
+      <div class="sidebar-footer">© All rights reserved</div>
+    </aside>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    
+    <!-- Header -->
+    <header class="app-header">
+      <button class="menu" id="menu-btn">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <div class="header-title">Dashboard</div>
+      <div class="header-actions">
+        <div class="profile-pic" onclick="goToProfile()">
+          <img src="assets/profile.jpg" alt="Profile" />
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Stats Cards -->
+    <div class="cards">
+      <div class="totalrevenuecarrd">
+        <h4>Total Revenue</h4>
+        <h1 id="totalRevenue">₹0</h1>
+        <h6 id="revenueProgress">0% this month</h6>
+      </div>
+      <div class="totalstudentscarrd">
+        <h4>Total Students</h4>
+        <h1 id="totalStudents">0</h1>
+        <h6 id="studentProgress">+0 this month</h6>
+      </div>
+      <div class="followupscarrd">
+        <h4>Follow-ups</h4>
+        <h1 id="totalFollowups">0</h1>
+        <h6 id="followupProgress">0% converted</h6>
+      </div>
+    </div>
+
+    <!-- 1. Financial Overview -->
+    <div class="analytics-section">
+      <div class="analytics-header">
+        <h2> Financial Overview</h2>
+        <select id="financeTimeframe">
+          <option value="thisMonth">This Month</option>
+          <option value="lastMonth">Last Month</option>
+          <option value="thisYear">This Year</option>
+        </select>
+      </div>
+      
+      <div class="chart-container">
+        <canvas id="revenueChart"></canvas>
+      </div>
+      
+      <div class="mini-stats">
+        <div class="mini-stat">
+          <div class="value" id="collectedFees">₹0</div>
+          <div class="label">Collected</div>
+        </div>
+        <div class="mini-stat">
+          <div class="value" id="pendingFees">₹0</div>
+          <div class="label">Pending</div>
+        </div>
+        <div class="mini-stat">
+          <div class="value" id="overdueFees">₹0</div>
+          <div class="label">Overdue</div>
+        </div>
+        <div class="mini-stat">
+          <div class="value" id="collectionRate">0%</div>
+          <div class="label">Collection Rate</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Batch Management Analytics -->
+    <div class="analytics-section">
+      <div class="analytics-header">
+        <h2> Batch Analytics</h2>
+        <button class="btn-secondary" onclick="refreshBatchAnalytics()">Refresh</button>
+      </div>
+      
+      <div class="chart-container">
+        <canvas id="batchChart"></canvas>
+      </div>
+      
+      <div class="mini-stats">
+        <div class="mini-stat">
+          <div class="value" id="totalBatches">0</div>
+          <div class="label">Active Batches</div>
+        </div>
+        <div class="mini-stat">
+          <div class="value" id="avgBatchSize">0</div>
+          <div class="label">Avg Students/Batch</div>
+        </div>
+        <div class="mini-stat">
+          <div class="value" id="capacityUtilization">0%</div>
+          <div class="label">Capacity Usage</div>
+        </div>
+        <div class="mini-stat">
+          <div class="value" id="batchPerformance">0%</div>
+          <div class="label">Top Performance</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Student Insights -->
+    <div class="insights-grid">
+      <div class="insight-card">
+        <h3> High Priority Students</h3>
+        <div class="student-list" id="highPriorityStudents">
+          <!-- Dynamic content -->
+        </div>
+      </div>
+      
+      <div class="insight-card">
+        <h3> Top Performing Batches</h3>
+        <div class="student-list" id="topBatches">
+          <!-- Dynamic content -->
+        </div>
+      </div>
+      
+      <div class="insight-card">
+        <h3> Payment Patterns</h3>
+        <div class="student-list" id="paymentPatterns">
+          <!-- Dynamic content -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Enhanced Follow-ups List -->
+    <div class="followups-card">
+      <div><h3>Follow-ups</h3></div>
+      <div class="f-list">
+        <ul id="followupList">
+          <!-- Dynamic content -->
+        </ul>
+      </div>
+      <button class="more-btn" onclick="window.location.href='batches.html'">More</button>
+    </div>
+
+  </main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="JS/main.js"></script>
+<script src="JS/dashboard.js"></script>
+</body>
+</html>
